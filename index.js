@@ -5,12 +5,15 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static('public'))
 
-app.get('/todos', (req, res) => {
-      const results = [];
-      if (results && results.length === 0) {
-          res.status(404).json({ error: 'Todos not found' });
+app.post('/', (req, res) => {
+      const token = 'example-token';
+      const email = req.body.email;
+      const pass = req.body.password;
+
+      if (email === 'test@example.com' && pass === 'qwerty1A') {
+        res.status(200).json(token)
       } else {
-          res.status(200).json(results);
+        res.status(404).json({ error: 'Wrong password or email' });
       }
 });
 
